@@ -39,7 +39,7 @@ impl Future for Server {
 }
 
 fn main() {
-    let addr = "0.0.0.0:1234".parse().unwrap();
+    let addr = "0.0.0.0:5555".parse().unwrap();
     let socket1 = UdpSocket::bind(&addr).unwrap();
     println!("Listening on: {}", socket1.local_addr().unwrap());
 
@@ -55,13 +55,13 @@ fn main() {
     current_thread::block_on_all(lazy(|| {
         let msg = String::from("init");
         let bc_addr = "255.255.255.255:1234".parse().unwrap();
-        match server.socket.poll_send_to(&msg.into_bytes().as_slice(), &bc_addr) {
-            Err(e) => return Err(e),
-            _ => println!("init sent")
-        }
-        
+        server.socket.poll_send_to(&msg.into_bytes().as_slice(), &bc_addr);
         
         println!("Sent init!");
+
+        if false {
+            return Err(Async::Ready(()))
+        }
 
         Ok(Async::Ready(()))
     })).expect("Error on init");
