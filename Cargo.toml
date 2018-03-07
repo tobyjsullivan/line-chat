@@ -1,0 +1,10 @@
+[package]
+name = "line-chat"
+version = "0.1.0"
+authors = ["Toby Sullivan <toby.s@canva.com>"]
+
+[dependencies]
+bytes = "0.4"
+tokio = { git = "https://github.com/tokio-rs/tokio" }
+tokio-io = "0.1.1"
+futures = "0.1"
